@@ -3,6 +3,7 @@ package com.hyd.dmaker;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -20,7 +21,18 @@ public class DiagramPaneTest extends Application {
         ScrollPane scrollPane = new ScrollPane(diagramPane);
         scrollPane.setPannable(true);
 
-        HBox hBox = new HBox(new Label("Ctrl + 鼠标滚轮缩放"));
+        CheckBox chkDisplayGrid = new CheckBox("显示网格");
+        chkDisplayGrid.setOnAction(event -> diagramPane.setShowGrid(chkDisplayGrid.isSelected()));
+
+        Label percent = new Label();
+        percent.textProperty().bind(diagramPane.zoomPercentProperty().asString().concat("%"));
+
+        HBox hBox = new HBox(
+                new Label("Ctrl + 鼠标滚轮缩放"),
+                chkDisplayGrid,
+                percent
+        );
+
         hBox.setPadding(new Insets(10));
         hBox.setSpacing(10);
 
