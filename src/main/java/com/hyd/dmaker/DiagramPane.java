@@ -1,6 +1,6 @@
 package com.hyd.dmaker;
 
-import com.hyd.dmaker.elements.Element;
+import com.hyd.dmaker.shape.Shape;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -32,7 +32,7 @@ public class DiagramPane extends Pane {
 
     private BooleanProperty showGrid = new SimpleBooleanProperty(false);
 
-    private List<Element> diagramElements = new ArrayList<>();
+    private List<Shape> shapes = new ArrayList<>();
 
     public DiagramPane(double initialWidth, double initialHeight) {
         this.initialWidth = initialWidth;
@@ -52,8 +52,12 @@ public class DiagramPane extends Pane {
         });
     }
 
-    public void addElement(Element element) {
-        this.diagramElements.add(element);
+    public void addShape(Shape shape) {
+        this.shapes.add(shape);
+        this.getChildren().add(shape);
+
+        shape.setZoomPercentProperty(zoomPercent);
+        shape.refresh();
     }
 
     public int getZoomPercent() {
@@ -136,11 +140,11 @@ public class DiagramPane extends Pane {
         );
 
         updateBackgroundGrid();
-        updateElements();
+        updateShapes();
     }
 
-    private void updateElements() {
-
+    private void updateShapes() {
+        this.shapes.forEach(Shape::refresh);
     }
 
     private void updateBackgroundGrid() {

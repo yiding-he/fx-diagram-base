@@ -1,5 +1,6 @@
 package com.hyd.dmaker;
 
+import com.hyd.dmaker.shape.geometry.RectangleShape;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -15,9 +16,12 @@ import javafx.stage.Stage;
  */
 public class DiagramPaneTest extends Application {
 
+    private DiagramPane diagramPane;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        DiagramPane diagramPane = new DiagramPane(1000, 1000);
+        diagramPane = new DiagramPane(1001, 1001);
+
         ScrollPane scrollPane = new ScrollPane(diagramPane);
         scrollPane.setPannable(true);
 
@@ -40,6 +44,15 @@ public class DiagramPaneTest extends Application {
         borderPane.setTop(hBox);
 
         primaryStage.setScene(new Scene(borderPane, 600, 400));
+        primaryStage.setOnShown(event -> this.onStageShown());
         primaryStage.show();
+    }
+
+    private void onStageShown() {
+        diagramPane.addShape(new RectangleShape(100, 200, 100, 100));
+        diagramPane.addShape(new RectangleShape(250, 200, 100, 100));
+        diagramPane.addShape(new RectangleShape(400, 200, 100, 100));
+        diagramPane.addShape(new RectangleShape(550, 200, 100, 100));
+        diagramPane.addShape(new RectangleShape(700, 200, 100, 100));
     }
 }

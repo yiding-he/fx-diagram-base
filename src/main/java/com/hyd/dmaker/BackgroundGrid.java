@@ -48,10 +48,10 @@ public class BackgroundGrid extends Canvas {
 
         Color gridColor = Color.web("#AAAAAA");
         gc.setStroke(gridColor);
-        gc.setLineDashes(1, gridSize - 4, 3, 0);  // 构建类似十字准星的网格
-        gc.setLineWidth(0.5);
+        gc.setLineDashes(2, gridSize - 4, 2, 0);  // 构建类似十字准星的网格
+        gc.setLineWidth(1);
 
-        double x = -1, y = -1;
+        double x = 0, y = 0;
         while (x < width) {
             gc.strokeLine(x, 0, x, height);
             x += gridSize;
