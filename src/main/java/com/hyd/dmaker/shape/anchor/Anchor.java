@@ -1,5 +1,20 @@
 package com.hyd.dmaker.shape.anchor;
 
-public abstract class Anchor {
+import javafx.scene.layout.Pane;
 
+public abstract class Anchor extends Pane {
+
+    private AnchorDirection direction;
+
+    public Anchor(AnchorDirection direction) {
+        this.direction = direction;
+    }
+
+    public AnchorDirection getDirection() {
+        return direction;
+    }
+
+    public void setDirection(AnchorDirection direction) {
+        this.direction = direction;
+    }
 }
